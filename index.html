@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>The Equilibrium Protocol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* إضافة خلفية ثابتة لضمان عدم ظهور شاشة بيضاء */
+        body { 
+            background-color: #151317 !important; 
+            margin: 0; 
+            padding: 0; 
+            overflow: hidden;
+            touch-action: none;
+            -webkit-user-select: none;
+        }
+        .tile-3d { 
+            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.4); 
+            transition: transform 0.1s;
+        }
+        .antimatter-style { background-color: #1a1a1a !important; border: 2px solid #ec4899 !important; color: #ec4899 !important; }
+    </style>
+</head>
+<body class="text-white h-screen flex flex-col">
 
+    <div id="loading" class="fixed inset-0 bg-[#151317] flex items-center justify-center z-50">
+        <div class="text-[#4cd6ff] animate-pulse">جاري تشغيل البروتوكول...</div>
+    </div>
+
+    <header class="p-4 border-b-4 border-[#373438] flex justify-between items-center bg-[#1d1b1f]">
+        <div id="levelDisplay" class="font-bold text-xl text-[#4cd6ff]">LEVEL 1</div>
+        <div class="flex gap-4">
+            <span id="livesDisplay">5 ❤️</span>
+        </div>
+    </header>
+
+    <main class="flex-1 flex flex-col items-center justify-around p-4">
+        <div id="upperZone" class="w-full max-w-sm h-32 border-2 border-[#4cd6ff] rounded-xl flex flex-wrap content-center justify-center gap-2">
+            <div class="text-[10px] opacity-30">MATTER ZONE</div>
+        </div>
+
+        <div id="lowerZone" class="w-full max-w-sm h-32 border-2 border-[#ec4899] bg-[#0f0d11] rounded-xl flex flex-wrap content-center justify-center gap-2">
+            <div class="text-[10px] opacity-30">ANTIMATTER ZONE</div>
+        </div>
+
+        <div id="inventory" class="w-full max-w-sm p-4 bg-[#211f23] rounded-2xl flex justify-center gap-3 min-h-[80px]">
+            </div>
+    </main>
+
+    <script>
+        window.onload = () => {
+            document.getElementById('loading').style.display = 'none';
+            new Game();
+        };
+
+        class Game {
+            constructor() {
+                this.level = 1;
+                this.lives = 5;
+                this.init();
+            }
+
+            init() {
+                this.upperSum = 0;
+                this.lowerSum = 0;
+                this.placed = 0;
+                document.getElementById('upperZone').innerHTML = '';
+                document.getElementById('lowerZone').innerHTML = '';
+                document.getElementById('levelDisplay').innerText = `LEVEL ${this.level}`;
+                
+                const target = 10 + (this.level * 2);
+                const p1 = [Math.floor(target/2), target - Math.floor(target/2)];
+                const p2 = [Math.floor(target/2), target - Math.floor(target/2)];
+                this.pieces = [...p1, ...p2].sort(() => Math.random() - 0.5);
+                
+                this.render();
+            }
+
+            render() {
+                const inv = document.getElementById('inventory');
+                inv.innerHTML = '';
+                this.pieces.forEach(val => {
+                    const div = document.createElement('div');
+                    div.className = 'w-12 h-12 bg-[#4cd6ff] text-black rounded-lg flex items-center justify-center font-bold tile-3d';
+                    div.innerText = val;
+                    div.onclick = () => this.askMove(div, val); // للتبسيط على الموبايل
+                    inv.appendChild(div);
+                });
+            }
+
+            askMove(el, val) {
+                // بدلاً من السحب المعقد، سنستخدم الضغط لتسهيل التجربة الأولى
+                const choice = confirm("مادة (موافق) أم مادة مضادة (إلغاء)؟");
+                el.remove();
+                if(choice) {
+                    this.upperSum += val;
+                    document.getElementById('upperZone').appendChild(el);
+                } else {
+                    this.lowerSum += val;
+                    el.classList.add('antimatter-style');
+                    document.getElementById('lowerZone').appendChild(el);
+                }
+                this.placed++;
+                if(this.placed === 4) this.check();
+            }
+
+            check() {
+                setTimeout(() => {
+                    if(this.upperSum === this.lowerSum) {
+                        alert("تم التوازن!");
+                        this.level++;
+                    } else {
+                        alert("خطأ في الحساب!");
+                        this.lives--;
+                    }
+                    this.init();
+                }, 500);
+            }
+        }
+    </script>
+</body>
+</html>
