@@ -6,100 +6,160 @@
     <title>The Equilibrium Protocol</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* إضافة خلفية ثابتة لضمان عدم ظهور شاشة بيضاء */
         body { 
-            background-color: #151317 !important; 
-            margin: 0; 
-            padding: 0; 
-            overflow: hidden;
+            background-color: #0f0e11; 
+            font-family: sans-serif;
             touch-action: none;
-            -webkit-user-select: none;
+            user-select: none;
         }
-        .tile-3d { 
-            box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.4); 
+        /* تصميم كتل صلبة (Solid & Bulk) كما طلبت */
+        .solid-box {
+            border: 4px solid #373438;
+            box-shadow: 8px 8px 0px #000;
+            border-radius: 12px;
+        }
+        .matter-zone { border-color: #4cd6ff; background: rgba(76, 214, 255, 0.05); }
+        .antimatter-zone { 
+            border-color: #ec4899; 
+            background: repeating-linear-gradient(45deg, #000, #000 10px, #1a0b14 10px, #1a0b14 20px);
+        }
+        .tile {
+            width: 60px;
+            height: 60px;
+            background: #4cd6ff;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            cursor: grab;
+            position: absolute;
             transition: transform 0.1s;
         }
-        .antimatter-style { background-color: #1a1a1a !important; border: 2px solid #ec4899 !important; color: #ec4899 !important; }
+        .antimatter-tile {
+            background: #1a1a1a !important;
+            color: #ec4899 !important;
+            border-color: #ec4899 !important;
+        }
     </style>
 </head>
-<body class="text-white h-screen flex flex-col">
+<body class="text-white h-screen flex flex-col p-4">
 
-    <div id="loading" class="fixed inset-0 bg-[#151317] flex items-center justify-center z-50">
-        <div class="text-[#4cd6ff] animate-pulse">جاري تشغيل البروتوكول...</div>
-    </div>
-
-    <header class="p-4 border-b-4 border-[#373438] flex justify-between items-center bg-[#1d1b1f]">
-        <div id="levelDisplay" class="font-bold text-xl text-[#4cd6ff]">LEVEL 1</div>
-        <div class="flex gap-4">
-            <span id="livesDisplay">5 ❤️</span>
-        </div>
+    <header class="flex justify-between items-center mb-6 px-2">
+        <div id="level" class="text-2xl font-black text-[#4cd6ff]">LEVEL 1</div>
+        <div id="lives" class="text-xl">❤️❤️❤️❤️❤️</div>
     </header>
 
-    <main class="flex-1 flex flex-col items-center justify-around p-4">
-        <div id="upperZone" class="w-full max-w-sm h-32 border-2 border-[#4cd6ff] rounded-xl flex flex-wrap content-center justify-center gap-2">
-            <div class="text-[10px] opacity-30">MATTER ZONE</div>
+    <main class="flex-1 flex flex-col gap-4 relative">
+        
+        <div id="upperTarget" class="solid-box matter-zone h-48 flex flex-wrap p-4 items-start content-start gap-2 relative">
+            <span class="absolute top-2 right-2 text-[10px] font-bold text-[#4cd6ff] opacity-40">MATTER</span>
         </div>
 
-        <div id="lowerZone" class="w-full max-w-sm h-32 border-2 border-[#ec4899] bg-[#0f0d11] rounded-xl flex flex-wrap content-center justify-center gap-2">
-            <div class="text-[10px] opacity-30">ANTIMATTER ZONE</div>
+        <div id="lowerTarget" class="solid-box antimatter-zone h-48 flex flex-wrap p-4 items-start content-start gap-2 relative">
+            <span class="absolute top-2 right-2 text-[10px] font-bold text-[#ec4899] opacity-40">ANTIMATTER</span>
         </div>
 
-        <div id="inventory" class="w-full max-w-sm p-4 bg-[#211f23] rounded-2xl flex justify-center gap-3 min-h-[80px]">
+        <div id="source" class="solid-box bg-[#1d1b1f] h-28 flex items-center justify-center gap-4 relative">
             </div>
     </main>
 
-    <script>
-        window.onload = () => {
-            document.getElementById('loading').style.display = 'none';
-            new Game();
-        };
+    <div class="mt-4 h-12 border-2 border-dashed border-gray-700 flex items-center justify-center text-[10px] text-gray-600">
+        AD BAR SPACE
+    </div>
 
-        class Game {
+    <script>
+        class Equilibrium {
             constructor() {
                 this.level = 1;
                 this.lives = 5;
-                this.init();
+                this.initLevel();
             }
 
-            init() {
-                this.upperSum = 0;
-                this.lowerSum = 0;
+            initLevel() {
+                this.upperTotal = 0;
+                this.lowerTotal = 0;
                 this.placed = 0;
-                document.getElementById('upperZone').innerHTML = '';
-                document.getElementById('lowerZone').innerHTML = '';
-                document.getElementById('levelDisplay').innerText = `LEVEL ${this.level}`;
+                document.getElementById('upperTarget').innerHTML = '';
+                document.getElementById('lowerTarget').innerHTML = '';
+                document.getElementById('source').innerHTML = '';
+                document.getElementById('level').innerText = `LEVEL ${this.level}`;
                 
-                const target = 10 + (this.level * 2);
-                const p1 = [Math.floor(target/2), target - Math.floor(target/2)];
-                const p2 = [Math.floor(target/2), target - Math.floor(target/2)];
-                this.pieces = [...p1, ...p2].sort(() => Math.random() - 0.5);
-                
-                this.render();
+                // منطق التوليد: بعد المستوى 5 تظهر الأرقام السالبة
+                const targetValue = 10 + (this.level * 2);
+                let vals = this.generateValues(targetValue);
+                this.createTiles(vals);
             }
 
-            render() {
-                const inv = document.getElementById('inventory');
-                inv.innerHTML = '';
-                this.pieces.forEach(val => {
-                    const div = document.createElement('div');
-                    div.className = 'w-12 h-12 bg-[#4cd6ff] text-black rounded-lg flex items-center justify-center font-bold tile-3d';
-                    div.innerText = val;
-                    div.onclick = () => this.askMove(div, val); // للتبسيط على الموبايل
-                    inv.appendChild(div);
+            generateValues(target) {
+                // توليد قطعتين لكل جهة لضمان التوازن
+                let v1 = Math.floor(Math.random() * target);
+                let v2 = target - v1;
+                let v3 = Math.floor(Math.random() * target);
+                let v4 = target - v3;
+                
+                let res = [v1, v2, v3, v4];
+                // حقن أرقام سالبة إذا كان المستوى > 5
+                if(this.level > 5) {
+                    res = res.map(v => Math.random() > 0.5 ? v : -Math.floor(Math.random() * 10));
+                }
+                return res.sort(() => Math.random() - 0.5);
+            }
+
+            createTiles(vals) {
+                const source = document.getElementById('source');
+                vals.forEach((v, i) => {
+                    const t = document.createElement('div');
+                    t.className = 'tile';
+                    t.innerText = v;
+                    t.style.left = `${(i * 70) + 20}px`;
+                    this.makeDraggable(t, v);
+                    source.appendChild(t);
                 });
             }
 
-            askMove(el, val) {
-                // بدلاً من السحب المعقد، سنستخدم الضغط لتسهيل التجربة الأولى
-                const choice = confirm("مادة (موافق) أم مادة مضادة (إلغاء)؟");
-                el.remove();
-                if(choice) {
-                    this.upperSum += val;
-                    document.getElementById('upperZone').appendChild(el);
+            makeDraggable(el, val) {
+                let startY, startX;
+                el.ontouchstart = (e) => {
+                    startY = e.touches[0].clientY;
+                    startX = e.touches[0].clientX;
+                    el.style.zIndex = 100;
+                };
+
+                el.ontouchmove = (e) => {
+                    let dy = e.touches[0].clientY - startY;
+                    let dx = e.touches[0].clientX - startX;
+                    el.style.transform = `translate(${dx}px, ${dy}px)`;
+                };
+
+                el.ontouchend = (e) => {
+                    const endY = e.changedTouches[0].clientY;
+                    const upBox = document.getElementById('upperTarget').getBoundingClientRect();
+                    const lowBox = document.getElementById('lowerTarget').getBoundingClientRect();
+
+                    if(endY < upBox.bottom && endY > upBox.top) {
+                        this.placeTile(el, val, 'upper');
+                    } else if(endY < lowBox.bottom && endY > lowBox.top) {
+                        this.placeTile(el, val, 'lower');
+                    } else {
+                        el.style.transform = `translate(0, 0)`;
+                    }
+                };
+            }
+
+            placeTile(el, val, zone) {
+                el.style.position = 'static';
+                el.style.transform = 'none';
+                if(zone === 'upper') {
+                    this.upperTotal += val;
+                    document.getElementById('upperTarget').appendChild(el);
                 } else {
-                    this.lowerSum += val;
-                    el.classList.add('antimatter-style');
-                    document.getElementById('lowerZone').appendChild(el);
+                    this.lowerTotal += val;
+                    el.classList.add('antimatter-tile');
+                    document.getElementById('lowerTarget').appendChild(el);
                 }
                 this.placed++;
                 if(this.placed === 4) this.check();
@@ -107,17 +167,19 @@
 
             check() {
                 setTimeout(() => {
-                    if(this.upperSum === this.lowerSum) {
-                        alert("تم التوازن!");
+                    if(this.upperTotal === this.lowerTotal) {
+                        alert("✨ توازن مثالي! ✨");
                         this.level++;
                     } else {
-                        alert("خطأ في الحساب!");
+                        alert("❌ خلل في الحسابات!");
                         this.lives--;
                     }
-                    this.init();
-                }, 500);
+                    this.initLevel();
+                }, 300);
             }
         }
+
+        new Equilibrium();
     </script>
 </body>
 </html>
