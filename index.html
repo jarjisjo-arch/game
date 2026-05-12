@@ -1,314 +1,162 @@
-<!DOCTYPE html>
-<html class="dark" lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Equal Blocks Gameplay</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
-    <script id="tailwind-config">
-          tailwind.config = {
-            darkMode: "class",
-            theme: {
-              extend: {
-                "colors": {
-                        "tertiary-fixed": "#ffdcbd",
-                        "inverse-primary": "#006591",
-                        "tertiary": "#ffb86e",
-                        "on-secondary-fixed-variant": "#92002a",
-                        "on-tertiary-fixed": "#2c1600",
-                        "tertiary-fixed-dim": "#ffb86e",
-                        "on-tertiary": "#492900",
-                        "on-error-container": "#ffdad6",
-                        "on-error": "#690005",
-                        "on-secondary": "#67001b",
-                        "error-container": "#93000a",
-                        "secondary-container": "#b50036",
-                        "surface-container-highest": "#30353a",
-                        "on-primary-container": "#003751",
-                        "surface": "#0f1418",
-                        "surface-container": "#1b2024",
-                        "on-tertiary-fixed-variant": "#693c00",
-                        "surface-tint": "#89ceff",
-                        "primary-container": "#0ea5e9",
-                        "surface-variant": "#30353a",
-                        "tertiary-container": "#de8712",
-                        "outline": "#88929b",
-                        "on-primary": "#00344d",
-                        "outline-variant": "#3e4850",
-                        "surface-container-high": "#252b2f",
-                        "surface-dim": "#0f1418",
-                        "inverse-surface": "#dee3e9",
-                        "surface-bright": "#353a3e",
-                        "on-tertiary-container": "#4d2b00",
-                        "on-surface": "#dee3e9",
-                        "secondary": "#ffb2b7",
-                        "inverse-on-surface": "#2c3135",
-                        "surface-container-lowest": "#0a0f13",
-                        "secondary-fixed-dim": "#ffb2b7",
-                        "primary-fixed": "#c9e6ff",
-                        "on-secondary-fixed": "#40000d",
-                        "on-primary-fixed": "#001e2f",
-                        "on-primary-fixed-variant": "#004c6e",
-                        "on-background": "#dee3e9",
-                        "surface-container-low": "#171c20",
-                        "primary": "#89ceff",
-                        "on-surface-variant": "#bec8d2",
-                        "secondary-fixed": "#ffdadb",
-                        "error": "#ffb4ab",
-                        "primary-fixed-dim": "#89ceff",
-                        "on-secondary-container": "#ffc2c4",
-                        "background": "#0f1418"
-                },
-                "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                },
-                "spacing": {
-                        "tile-gap": "8px",
-                        "container-margin": "24px",
-                        "stack-sm": "4px",
-                        "grid-padding": "16px",
-                        "stack-md": "12px"
-                },
-                "fontFamily": {
-                        "headline-lg": ["Quicksand"],
-                        "label-caps": ["Quicksand"],
-                        "body-md": ["Quicksand"],
-                        "body-lg": ["Quicksand"],
-                        "display-number": ["Quicksand"],
-                        "headline-md": ["Quicksand"]
-                },
-                "fontSize": {
-                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
-                        "label-caps": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700"}],
-                        "body-md": ["16px", {"lineHeight": "22px", "fontWeight": "500"}],
-                        "body-lg": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
-                        "display-number": ["48px", {"lineHeight": "52px", "fontWeight": "700"}],
-                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
-                }
-              }
-            }
-          }
-        </script>
-    <style>
-        .inner-glow { box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2); }
-        .tactile-shadow { box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2); }
-        .tile-shadow { box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4), 0 8px 12px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2); }
-        .recessed-tray { box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.5), inset 0 -2px 4px rgba(255, 255, 255, 0.05); }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        body { min-height: max(884px, 100dvh); }
-    </style>
-</head>
-<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container touch-none">
 
-<header class="bg-surface/80 backdrop-blur-md flex justify-between items-center px-container-margin h-20 w-full border-b border-outline-variant/10 shadow-sm sticky top-0 z-50">
-    <div class="flex items-center gap-stack-md">
-        <span class="material-symbols-outlined text-primary" data-icon="grid_view">grid_view</span>
-        <h1 class="font-headline-md text-headline-md font-extrabold text-primary tracking-tight">Equal Blocks</h1>
-    </div>
-    <div class="flex items-center gap-stack-md font-label-caps text-label-caps text-on-surface-variant">
-        <span id="lv-display">Lv. 1</span>
-    </div>
-</header>
-
-<main class="flex-1 flex flex-col px-container-margin py-stack-md gap-stack-md w-full max-w-md mx-auto">
-    <!-- Status Bar -->
-    <div class="flex justify-between items-center bg-surface-container-high rounded-xl p-grid-padding shadow-sm border border-outline-variant/20 inner-glow">
-        <div id="hearts-container" class="flex gap-stack-sm text-secondary">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
-        </div>
-        <div id="timer-display" class="font-display-number text-[32px] leading-tight text-on-surface font-mono tracking-widest">
-            01:00
-        </div>
-    </div>
-
-    <!-- Game Board -->
-    <div class="flex-1 bg-surface-container rounded-3xl p-grid-padding recessed-tray border border-outline-variant/30 flex flex-col gap-stack-md relative min-h-[400px]">
-        <!-- Upper Section -->
-        <div id="upper-zone" class="flex-1 flex flex-wrap justify-center content-center gap-tile-gap bg-surface-container-low rounded-xl border border-outline-variant/10 p-grid-padding min-h-[150px]">
-        </div>
-        
-        <!-- Divider -->
-        <div class="flex items-center w-full px-grid-padding opacity-50">
-            <div class="h-px flex-1 bg-outline-variant"></div>
-            <span class="material-symbols-outlined text-outline-variant mx-stack-sm">unfold_more</span>
-            <div class="h-px flex-1 bg-outline-variant"></div>
-        </div>
-
-        <!-- Lower Section -->
-        <div id="lower-zone" class="flex-1 flex flex-wrap justify-center content-center gap-tile-gap bg-surface-container-low rounded-xl border border-outline-variant/10 p-grid-padding border-dashed min-h-[150px]">
-        </div>
-    </div>
-
-    <!-- Tray -->
-    <div class="rounded-xl p-grid-padding mt-2">
-        <div id="tray-container" class="flex justify-center gap-tile-gap overflow-x-auto pb-stack-sm hide-scrollbar">
-        </div>
-    </div>
-</main>
-
-<div class="w-full bg-surface-container-lowest border-t border-outline-variant/20 p-stack-md flex justify-center mt-auto">
-    <div class="w-[320px] h-[50px] bg-surface border border-dashed border-outline-variant flex items-center justify-center rounded text-outline font-label-caps text-label-caps">
-        Ad
-    </div>
-</div>
-
-<script>
-/**
- * BACKEND LOGIC FOR EQUAL BLOCKS
- */
-class EqualBlocksEngine {
-    constructor() {
-        this.lv = 1;
-        this.lives = 3;
-        this.timeLeft = 60;
-        this.upperSum = 0;
-        this.lowerSum = 0;
-        this.placedCount = 0;
-        this.timer = null;
-        
-        this.init();
+    function burstConfetti() {
+      els.confettiLayer.innerHTML = "";
+      const colors = ["#89ceff", "#b50036", "#ffb86e", "#98d85f", "#ffdc2f", "#c735e7"];
+      for (let i = 0; i < 28; i++) {
+        const piece = document.createElement("span");
+        piece.className = "confetti";
+        piece.style.left = `${randInt(8, 92)}vw`;
+        piece.style.top = `${randInt(-12, 10)}vh`;
+        piece.style.background = colors[i % colors.length];
+        piece.style.setProperty("--dx", `${randInt(-80, 80)}px`);
+        piece.style.animationDelay = `${Math.random() * 180}ms`;
+        els.confettiLayer.appendChild(piece);
+      }
+      window.setTimeout(() => els.confettiLayer.innerHTML = "", 1300);
     }
 
-    init() {
-        this.startTimer();
-        this.generateLevel();
+    function playTone(frequency, duration) {
+      if (!state.settings.sound) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const context = new AudioContext();
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.type = "sine";
+        oscillator.frequency.value = frequency;
+        gain.gain.setValueAtTime(0.04, context.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, context.currentTime + duration);
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+        oscillator.start();
+        oscillator.stop(context.currentTime + duration);
+      } catch {
+        // Sound is optional.
+      }
     }
 
-    startTimer() {
-        if (this.timer) clearInterval(this.timer);
-        this.timer = setInterval(() => {
-            this.timeLeft--;
-            const m = Math.floor(this.timeLeft / 60).toString().padStart(2, '0');
-            const s = (this.timeLeft % 60).toString().padStart(2, '0');
-            document.getElementById('timer-display').innerText = `${m}:${s}`;
-            if (this.timeLeft <= 0) this.handleFailure("Time Out!");
-        }, 1000);
+    function vibrate(pattern) {
+      if (state.settings.vibration && navigator.vibrate) {
+        navigator.vibrate(pattern);
+      }
     }
 
-    generateLevel() {
-        this.upperSum = 0;
-        this.lowerSum = 0;
-        this.placedCount = 0;
-        document.getElementById('upper-zone').innerHTML = '';
-        document.getElementById('lower-zone').innerHTML = '';
-        document.getElementById('lv-display').innerText = `Lv. ${this.lv}`;
-        this.updateHearts();
-
-        // Puzzle Logic: Create a sum and split it
-        let base = 10 + (this.lv * 5);
-        let pieces = [];
-        
-        // Logic for Lv > 5 (Negatives), Lv > 10 (Decimals)
-        const generateVal = () => {
-            let v = Math.floor(Math.random() * base) + 1;
-            if (this.lv > 5 && Math.random() > 0.7) v *= -1;
-            if (this.lv > 10 && Math.random() > 0.8) v = parseFloat((v * 0.1).toFixed(1));
-            return v;
-        };
-
-        let target = generateVal() + generateVal();
-        let p1 = generateVal();
-        let p2 = target - p1;
-        let p3 = generateVal();
-        let p4 = target - p3;
-
-        pieces = [p1, p2, p3, p4].sort(() => Math.random() - 0.5);
-        this.renderTray(pieces);
+    function formatTime(seconds) {
+      const safe = Math.max(0, seconds);
+      const mins = Math.floor(safe / 60);
+      const secs = safe % 60;
+      return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
     }
 
-    renderTray(pieces) {
-        const tray = document.getElementById('tray-container');
-        tray.innerHTML = '';
-        const configs = [
-            {bg: 'bg-tertiary-container', on: 'text-on-tertiary-container', border: 'border-tertiary/20'},
-            {bg: 'bg-primary', on: 'text-on-primary', border: 'border-primary-fixed-dim/20'},
-            {bg: 'bg-tertiary', on: 'text-on-tertiary', border: 'border-tertiary-fixed-dim/20'},
-            {bg: 'bg-secondary-container', on: 'text-on-secondary-container', border: 'border-secondary/20'}
-        ];
-
-        pieces.forEach((val, i) => {
-            const conf = configs[i % 4];
-            const tile = document.createElement('div');
-            tile.className = `w-16 h-16 ${conf.bg} rounded-lg flex flex-col items-center justify-center tile-shadow border ${conf.border} cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-transform flex-shrink-0 relative group`;
-            tile.innerHTML = `
-                <span class="material-symbols-outlined absolute top-1 text-[12px] ${conf.on}/50 group-hover:${conf.on} transition-colors">keyboard_arrow_up</span>
-                <span class="font-headline-md text-headline-md ${conf.on} drop-shadow-sm mt-1">${val}</span>
-                <span class="material-symbols-outlined absolute bottom-1 text-[12px] ${conf.on}/50 group-hover:${conf.on} transition-colors">keyboard_arrow_down</span>
-            `;
-            
-            this.attachSwipe(tile, val, conf);
-            tray.appendChild(tile);
-        });
+    function toSuperscript(number) {
+      const map = {
+        "-": "⁻",
+        "0": "⁰",
+        "1": "¹",
+        "2": "²",
+        "3": "³",
+        "4": "⁴",
+        "5": "⁵",
+        "6": "⁶",
+        "7": "⁷",
+        "8": "⁸",
+        "9": "⁹"
+      };
+      return String(number).split("").map((char) => map[char] || char).join("");
     }
 
-    attachSwipe(el, val, conf) {
-        let startY = 0;
-        el.addEventListener('touchstart', e => startY = e.touches[0].clientY, {passive: true});
-        el.addEventListener('touchend', e => {
-            let diff = startY - e.changedTouches[0].clientY;
-            if (Math.abs(diff) > 40) {
-                this.placeTile(val, diff > 0 ? 'upper' : 'lower', conf);
-                el.remove();
-            }
-        });
+    function formatRoot(degree, radicand) {
+      if (degree === 2) return `√${radicand}`;
+      if (degree === 3) return `∛${radicand}`;
+      if (degree === 4) return `∜${radicand}`;
+      return `${toSuperscript(degree)}√${radicand}`;
     }
 
-    placeTile(val, zone, conf) {
-        const container = document.getElementById(`${zone}-zone`);
-        const placed = document.createElement('div');
-        placed.className = `w-20 h-20 ${zone === 'upper' ? 'bg-primary-container' : 'bg-secondary-container'} rounded-xl flex items-center justify-center tile-shadow border border-white/10 transition-transform`;
-        placed.innerHTML = `<span class="font-display-number text-display-number drop-shadow-md">${val}</span>`;
-        
-        container.appendChild(placed);
-        if (zone === 'upper') this.upperSum += val;
-        else this.lowerSum += val;
-
-        this.placedCount++;
-        if (this.placedCount === 4) this.validate();
+    function roundValue(value) {
+      return Math.round(value * 100) / 100;
     }
 
-    validate() {
-        setTimeout(() => {
-            if (Math.abs(this.upperSum - this.lowerSum) < 0.01) {
-                alert("Equalized!");
-                this.lv++;
-                this.timeLeft += 15;
-                this.generateLevel();
-            } else {
-                this.handleFailure(`Imbalance: ${this.upperSum} vs ${this.lowerSum}`);
-            }
-        }, 400);
+    function randInt(min, max) {
+      const low = Math.ceil(Math.min(min, max));
+      const high = Math.floor(Math.max(min, max));
+      return Math.floor(Math.random() * (high - low + 1)) + low;
     }
 
-    updateHearts() {
-        const container = document.getElementById('hearts-container');
-        container.innerHTML = Array(3).fill(0).map((_, i) => 
-            `<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' ${i < this.lives ? 1 : 0};">favorite</span>`
-        ).join('');
+    function shuffle(array) {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
     }
 
-    handleFailure(msg) {
-        this.lives--;
-        alert(msg);
-        if (this.lives <= 0) {
-            alert("Game Over!");
-            this.lv = 1;
-            this.lives = 3;
-            this.timeLeft = 60;
+    function wireEvents() {
+      $("#play-button").addEventListener("click", () => startLevel(state.level));
+      $("#new-game-button").addEventListener("click", () => {
+        state.level = 1;
+        state.bonusTime = 0;
+        saveGame();
+        startLevel(1);
+      });
+      $("#menu-settings-button").addEventListener("click", () => openModal("settings-modal"));
+      $("#how-button").addEventListener("click", () => openModal("rules-modal"));
+      $("#pause-button").addEventListener("click", () => {
+        if (!state.solved) openModal("pause-modal");
+      });
+      $("#resume-button").addEventListener("click", () => closeModal("pause-modal"));
+      $("#restart-button").addEventListener("click", () => startLevel(state.level));
+      $("#pause-settings-button").addEventListener("click", () => openModal("settings-modal"));
+      $("#quit-button").addEventListener("click", () => {
+        clearTimer();
+        closeAllModals();
+        state.isPlaying = false;
+        showScreen("menu");
+      });
+      $("#next-level-button").addEventListener("click", () => startLevel(state.level));
+      $("#try-again-button").addEventListener("click", () => startLevel(state.level));
+      $("#gameover-menu-button").addEventListener("click", () => {
+        closeAllModals();
+        showScreen("menu");
+      });
+      $("#reset-progress-button").addEventListener("click", () => {
+        state.level = 1;
+        state.bestLevel = 1;
+        state.bonusTime = 0;
+        saveGame();
+        renderMenu();
+        showToast("Progress reset");
+      });
+
+      els.soundToggle.addEventListener("click", () => {
+        state.settings.sound = !state.settings.sound;
+        saveGame();
+        renderToggles();
+      });
+      els.vibrationToggle.addEventListener("click", () => {
+        state.settings.vibration = !state.settings.vibration;
+        saveGame();
+        renderToggles();
+      });
+
+      $$("[data-close-modal]").forEach((button) => {
+        button.addEventListener("click", () => closeModal(button.dataset.closeModal));
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          if (els.settingsModal.classList.contains("is-active")) closeModal("settings-modal");
+          else if (els.rulesModal.classList.contains("is-active")) closeModal("rules-modal");
+          else if (els.pauseModal.classList.contains("is-active")) closeModal("pause-modal");
+          else if (state.activeScreen === "game" && !state.solved) openModal("pause-modal");
         }
-        this.generateLevel();
+      });
     }
-}
 
-window.onload = () => new EqualBlocksEngine();
-</script>
+    loadSave();
+    wireEvents();
+    renderMenu();
+    renderToggles();
+  </script>
 </body>
 </html>
