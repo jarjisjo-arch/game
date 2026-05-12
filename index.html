@@ -3,312 +3,312 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>The Scratch - Gameplay</title>
+    <title>Equal Blocks Gameplay</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@700;800&amp;family=JetBrains+Mono:wght@500&amp;family=Quicksand:wght@600&amp;family=Rubik:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&amp;display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = {
+          tailwind.config = {
             darkMode: "class",
             theme: {
-                extend: {
-                    "colors": {
-                        "on-tertiary-fixed": "#131f00",
-                        "primary-fixed-dim": "#4cd6ff",
-                        "on-secondary": "#5e0053",
-                        "outline-variant": "#3c494e",
-                        "tertiary": "#acf100",
-                        "surface-container-highest": "#373438",
-                        "on-primary-container": "#00566a",
-                        "surface-dim": "#151317",
-                        "surface-container": "#211f23",
-                        "secondary-fixed": "#ffd7f0",
-                        "error": "#ffb4ab",
-                        "on-background": "#e7e1e6",
-                        "surface-variant": "#373438",
-                        "inverse-primary": "#00677f",
-                        "outline": "#859399",
-                        "primary-fixed": "#b7eaff",
-                        "inverse-on-surface": "#322f34",
-                        "on-tertiary-fixed-variant": "#354e00",
+              extend: {
+                "colors": {
+                        "tertiary-fixed": "#ffdcbd",
+                        "inverse-primary": "#006591",
+                        "tertiary": "#ffb86e",
+                        "on-secondary-fixed-variant": "#92002a",
+                        "on-tertiary-fixed": "#2c1600",
+                        "tertiary-fixed-dim": "#ffb86e",
+                        "on-tertiary": "#492900",
                         "on-error-container": "#ffdad6",
-                        "on-primary-fixed": "#001f28",
-                        "surface": "#151317",
-                        "surface-container-high": "#2c292d",
-                        "tertiary-fixed-dim": "#9bd900",
-                        "on-surface": "#e7e1e6",
-                        "on-secondary-container": "#520049",
-                        "primary": "#a4e6ff",
-                        "on-tertiary": "#243600",
-                        "on-primary-fixed-variant": "#004e60",
-                        "secondary": "#fface8",
-                        "surface-tint": "#4cd6ff",
-                        "surface-container-low": "#1d1b1f",
-                        "inverse-surface": "#e7e1e6",
-                        "secondary-container": "#ff24e4",
-                        "surface-container-lowest": "#0f0d11",
-                        "tertiary-container": "#96d300",
-                        "on-secondary-fixed-variant": "#840076",
-                        "primary-container": "#00d1ff",
-                        "error-container": "#93000a",
-                        "secondary-fixed-dim": "#fface8",
-                        "background": "#151317",
-                        "on-secondary-fixed": "#3a0033",
-                        "on-tertiary-container": "#3c5700",
                         "on-error": "#690005",
-                        "tertiary-fixed": "#b1f800",
-                        "surface-bright": "#3b383d",
-                        "on-primary": "#003543",
-                        "on-surface-variant": "#bbc9cf",
-                        "tile-orange": "#f97316",
-                        "tile-pink": "#ec4899",
-                        "tile-teal": "#14b8a6",
-                        "tile-lime": "#84cc16",
-                        "tile-purple": "#a855f7",
-                        "tile-blue": "#3b82f6",
-                        "tile-yellow": "#eab308",
-                        "tile-red": "#ef4444",
-                        "tile-dark": "#27272a"
-                    },
-                    "borderRadius": {
+                        "on-secondary": "#67001b",
+                        "error-container": "#93000a",
+                        "secondary-container": "#b50036",
+                        "surface-container-highest": "#30353a",
+                        "on-primary-container": "#003751",
+                        "surface": "#0f1418",
+                        "surface-container": "#1b2024",
+                        "on-tertiary-fixed-variant": "#693c00",
+                        "surface-tint": "#89ceff",
+                        "primary-container": "#0ea5e9",
+                        "surface-variant": "#30353a",
+                        "tertiary-container": "#de8712",
+                        "outline": "#88929b",
+                        "on-primary": "#00344d",
+                        "outline-variant": "#3e4850",
+                        "surface-container-high": "#252b2f",
+                        "surface-dim": "#0f1418",
+                        "inverse-surface": "#dee3e9",
+                        "surface-bright": "#353a3e",
+                        "on-tertiary-container": "#4d2b00",
+                        "on-surface": "#dee3e9",
+                        "secondary": "#ffb2b7",
+                        "inverse-on-surface": "#2c3135",
+                        "surface-container-lowest": "#0a0f13",
+                        "secondary-fixed-dim": "#ffb2b7",
+                        "primary-fixed": "#c9e6ff",
+                        "on-secondary-fixed": "#40000d",
+                        "on-primary-fixed": "#001e2f",
+                        "on-primary-fixed-variant": "#004c6e",
+                        "on-background": "#dee3e9",
+                        "surface-container-low": "#171c20",
+                        "primary": "#89ceff",
+                        "on-surface-variant": "#bec8d2",
+                        "secondary-fixed": "#ffdadb",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#89ceff",
+                        "on-secondary-container": "#ffc2c4",
+                        "background": "#0f1418"
+                },
+                "borderRadius": {
                         "DEFAULT": "0.25rem",
                         "lg": "0.5rem",
                         "xl": "0.75rem",
-                        "2xl": "1rem",
                         "full": "9999px"
-                    },
-                    "spacing": {
-                        "margin-desktop": "64px",
-                        "md": "24px",
-                        "lg": "48px",
-                        "margin-mobile": "16px",
-                        "safe-margin": "20px",
-                        "xl": "80px",
-                        "xs": "4px",
-                        "gutter": "24px",
-                        "base": "8px",
-                        "sm": "12px",
-                        "unit": "4px"
-                    },
-                    "fontFamily": {
-                        "body-lg": ["Rubik"],
-                        "body-md": ["Rubik"],
-                        "label-sm": ["Rubik"],
-                        "label-md": ["Rubik"],
-                        "headline-lg": ["Anybody"],
-                        "headline-md": ["Rubik"],
-                        "headline-lg-mobile": ["Anybody"],
-                        "display-lg-mobile": ["Rubik"],
-                        "label-bold": ["Rubik"],
-                        "display-lg": ["Anybody"]
-                    }
                 },
-            },
-        }
-    </script>
+                "spacing": {
+                        "tile-gap": "8px",
+                        "container-margin": "24px",
+                        "stack-sm": "4px",
+                        "grid-padding": "16px",
+                        "stack-md": "12px"
+                },
+                "fontFamily": {
+                        "headline-lg": ["Quicksand"],
+                        "label-caps": ["Quicksand"],
+                        "body-md": ["Quicksand"],
+                        "body-lg": ["Quicksand"],
+                        "display-number": ["Quicksand"],
+                        "headline-md": ["Quicksand"]
+                },
+                "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "label-caps": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "22px", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "display-number": ["48px", {"lineHeight": "52px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                }
+              }
+            }
+          }
+        </script>
     <style>
-        .tile-3d {
-            box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.4);
-            transition: all 0.1s ease-in-out;
-        }
-        .tile-3d:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.4);
-        }
-        .empty-slot {
-            background-color: rgba(39, 39, 42, 0.5);
-            border: 2px dashed rgba(255, 255, 255, 0.1);
-        }
-        .glow-teal { box-shadow: 0 0 20px 0px rgba(20, 184, 166, 0.4); }
-        .glow-orange { box-shadow: 0 0 20px 0px rgba(249, 115, 22, 0.4); }
+        .inner-glow { box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2); }
+        .tactile-shadow { box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2); }
+        .tile-shadow { box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4), 0 8px 12px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2); }
+        .recessed-tray { box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.5), inset 0 -2px 4px rgba(255, 255, 255, 0.05); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         body { min-height: max(884px, 100dvh); }
     </style>
 </head>
-<body class="bg-surface text-on-surface h-screen flex flex-col font-body-lg overflow-hidden touch-none select-none">
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container touch-none">
 
-<header class="bg-surface font-headline-lg docked full-width top-0 border-b-4 border-surface-container-highest shadow-[0_4px_0_0_rgba(0,0,0,0.3)] flex justify-between items-center px-safe-margin h-[72px] w-full z-10 shrink-0 relative">
-    <div class="flex-none w-[100px] flex justify-start">
-        <button class="text-primary hover:opacity-80 active:translate-y-0.5 transition-all p-xs flex items-center justify-center">
-            <span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">menu</span>
-        </button>
+<header class="bg-surface/80 backdrop-blur-md flex justify-between items-center px-container-margin h-20 w-full border-b border-outline-variant/10 shadow-sm sticky top-0 z-50">
+    <div class="flex items-center gap-stack-md">
+        <span class="material-symbols-outlined text-primary" data-icon="grid_view">grid_view</span>
+        <h1 class="font-headline-md text-headline-md font-extrabold text-primary tracking-tight">Equal Blocks</h1>
     </div>
-    <div class="flex-1 flex justify-center whitespace-nowrap">
-        <h1 id="level-title" class="font-display-lg text-[24px] uppercase text-primary tracking-tighter">LEVEL 1</h1>
-    </div>
-    <div class="flex-none w-[160px] flex justify-end items-center gap-xs">
-        <div class="bg-surface-container-high px-sm py-1 rounded-lg border-b-2 border-surface-container-highest flex items-center gap-1">
-            <span class="text-[10px] font-label-bold text-outline uppercase hidden sm:inline">Lives</span>
-            <div class="flex items-center text-error">
-                <span id="lives-count" class="font-jetbrains-mono text-[16px] font-bold mr-0.5">5</span>
-                <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
-            </div>
-        </div>
-        <div class="bg-surface-container-high px-sm py-1 rounded-lg border-b-2 border-surface-container-highest flex items-center gap-1">
-            <span class="text-[10px] font-label-bold text-outline uppercase hidden sm:inline">Left</span>
-            <span id="timer" class="font-jetbrains-mono text-[16px] text-primary font-bold">02:00</span>
-        </div>
+    <div class="flex items-center gap-stack-md font-label-caps text-label-caps text-on-surface-variant">
+        <span id="lv-display">Lv. 1</span>
     </div>
 </header>
 
-<main class="flex-1 flex flex-col items-center p-safe-margin overflow-y-auto w-full max-w-md mx-auto">
-    <div class="bg-surface-container rounded-2xl border-4 border-surface-container-highest shadow-lg flex flex-col overflow-hidden relative h-[400px] w-[320px] my-auto">
-        <div id="upper-zone" class="h-1/2 w-full p-md flex flex-wrap content-center justify-center gap-md relative border-surface-container-highest bg-gradient-to-b from-surface-container-low to-transparent border-b-2">
-            </div>
-        <div class="w-full h-1 bg-surface-container-highest relative flex items-center justify-center">
-            <div class="absolute w-full h-px bg-primary/30 blur-[2px]"></div>
+<main class="flex-1 flex flex-col px-container-margin py-stack-md gap-stack-md w-full max-w-md mx-auto">
+    <!-- Status Bar -->
+    <div class="flex justify-between items-center bg-surface-container-high rounded-xl p-grid-padding shadow-sm border border-outline-variant/20 inner-glow">
+        <div id="hearts-container" class="flex gap-stack-sm text-secondary">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
         </div>
-        <div id="lower-zone" class="h-1/2 w-full p-md flex flex-wrap content-center justify-center gap-md relative bg-gradient-to-t from-surface-container-low to-transparent border-t-2">
-            </div>
+        <div id="timer-display" class="font-display-number text-[32px] leading-tight text-on-surface font-mono tracking-widest">
+            01:00
+        </div>
     </div>
 
-    <div class="w-full bg-surface-container-high rounded-xl p-sm border-2 border-surface-container-highest shadow-inner mb-sm mt-lg">
-        <div id="inventory-tray" class="flex justify-center gap-gutter items-center min-h-[64px]">
-            </div>
+    <!-- Game Board -->
+    <div class="flex-1 bg-surface-container rounded-3xl p-grid-padding recessed-tray border border-outline-variant/30 flex flex-col gap-stack-md relative min-h-[400px]">
+        <!-- Upper Section -->
+        <div id="upper-zone" class="flex-1 flex flex-wrap justify-center content-center gap-tile-gap bg-surface-container-low rounded-xl border border-outline-variant/10 p-grid-padding min-h-[150px]">
+        </div>
+        
+        <!-- Divider -->
+        <div class="flex items-center w-full px-grid-padding opacity-50">
+            <div class="h-px flex-1 bg-outline-variant"></div>
+            <span class="material-symbols-outlined text-outline-variant mx-stack-sm">unfold_more</span>
+            <div class="h-px flex-1 bg-outline-variant"></div>
+        </div>
+
+        <!-- Lower Section -->
+        <div id="lower-zone" class="flex-1 flex flex-wrap justify-center content-center gap-tile-gap bg-surface-container-low rounded-xl border border-outline-variant/10 p-grid-padding border-dashed min-h-[150px]">
+        </div>
+    </div>
+
+    <!-- Tray -->
+    <div class="rounded-xl p-grid-padding mt-2">
+        <div id="tray-container" class="flex justify-center gap-tile-gap overflow-x-auto pb-stack-sm hide-scrollbar">
+        </div>
     </div>
 </main>
 
-<div class="w-full h-[60px] bg-surface-container-lowest border-t border-surface-container-highest flex items-center justify-center shrink-0 z-20">
-    <div class="w-full max-w-[320px] h-[50px] bg-surface-variant rounded flex items-center justify-center text-on-surface-variant font-label-md uppercase tracking-wider border border-outline-variant border-dashed">
-        Advertisement Placeholder
+<div class="w-full bg-surface-container-lowest border-t border-outline-variant/20 p-stack-md flex justify-center mt-auto">
+    <div class="w-[320px] h-[50px] bg-surface border border-dashed border-outline-variant flex items-center justify-center rounded text-outline font-label-caps text-label-caps">
+        Ad
     </div>
 </div>
 
 <script>
 /**
- * THE EQUILIBRIUM PROTOCOL - Game Engine
- * Logic added to support dynamic gameplay while keeping the UI identical.
+ * BACKEND LOGIC FOR EQUAL BLOCKS
  */
-
-class GameEngine {
+class EqualBlocksEngine {
     constructor() {
-        this.level = 1;
-        this.lives = 5;
-        this.timeLeft = 120;
-        this.timerInterval = null;
+        this.lv = 1;
+        this.lives = 3;
+        this.timeLeft = 60;
         this.upperSum = 0;
         this.lowerSum = 0;
-        this.pieces = [];
         this.placedCount = 0;
-        this.colors = ['#f97316', '#ec4899', '#14b8a6', '#84cc16', '#a855f7', '#3b82f6', '#eab308', '#ef4444'];
+        this.timer = null;
         
         this.init();
     }
 
     init() {
-        this.setupTimer();
-        this.startLevel();
+        this.startTimer();
+        this.generateLevel();
     }
 
-    setupTimer() {
-        if (this.timerInterval) clearInterval(this.timerInterval);
-        this.timerInterval = setInterval(() => {
+    startTimer() {
+        if (this.timer) clearInterval(this.timer);
+        this.timer = setInterval(() => {
             this.timeLeft--;
-            const mins = Math.floor(this.timeLeft / 60).toString().padStart(2, '0');
-            const secs = (this.timeLeft % 60).toString().padStart(2, '0');
-            document.getElementById('timer').innerText = `${mins}:${secs}`;
-            if (this.timeLeft <= 0) this.handleGameOver("Time Up!");
+            const m = Math.floor(this.timeLeft / 60).toString().padStart(2, '0');
+            const s = (this.timeLeft % 60).toString().padStart(2, '0');
+            document.getElementById('timer-display').innerText = `${m}:${s}`;
+            if (this.timeLeft <= 0) this.handleFailure("Time Out!");
         }, 1000);
     }
 
-    startLevel() {
+    generateLevel() {
         this.upperSum = 0;
         this.lowerSum = 0;
         this.placedCount = 0;
         document.getElementById('upper-zone').innerHTML = '';
         document.getElementById('lower-zone').innerHTML = '';
-        document.getElementById('level-title').innerText = `LEVEL ${this.level}`;
-        document.getElementById('lives-count').innerText = this.lives;
+        document.getElementById('lv-display').innerText = `Lv. ${this.lv}`;
+        this.updateHearts();
 
-        // Difficulty Math Logic
-        const target = 10 + (this.level * 5);
-        this.generatePuzzle(target);
-    }
+        // Puzzle Logic: Create a sum and split it
+        let base = 10 + (this.lv * 5);
+        let pieces = [];
+        
+        // Logic for Lv > 5 (Negatives), Lv > 10 (Decimals)
+        const generateVal = () => {
+            let v = Math.floor(Math.random() * base) + 1;
+            if (this.lv > 5 && Math.random() > 0.7) v *= -1;
+            if (this.lv > 10 && Math.random() > 0.8) v = parseFloat((v * 0.1).toFixed(1));
+            return v;
+        };
 
-    generatePuzzle(target) {
-        // Simple decomposition for 4 pieces
-        let p1 = Math.floor(Math.random() * (target - 5)) + 2;
+        let target = generateVal() + generateVal();
+        let p1 = generateVal();
         let p2 = target - p1;
-        let p3 = Math.floor(Math.random() * (target - 5)) + 2;
+        let p3 = generateVal();
         let p4 = target - p3;
 
-        this.pieces = [p1, p2, p3, p4].sort(() => Math.random() - 0.5);
-        this.renderTray();
+        pieces = [p1, p2, p3, p4].sort(() => Math.random() - 0.5);
+        this.renderTray(pieces);
     }
 
-    renderTray() {
-        const tray = document.getElementById('inventory-tray');
+    renderTray(pieces) {
+        const tray = document.getElementById('tray-container');
         tray.innerHTML = '';
-        this.pieces.forEach((val, idx) => {
-            const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+        const configs = [
+            {bg: 'bg-tertiary-container', on: 'text-on-tertiary-container', border: 'border-tertiary/20'},
+            {bg: 'bg-primary', on: 'text-on-primary', border: 'border-primary-fixed-dim/20'},
+            {bg: 'bg-tertiary', on: 'text-on-tertiary', border: 'border-tertiary-fixed-dim/20'},
+            {bg: 'bg-secondary-container', on: 'text-on-secondary-container', border: 'border-secondary/20'}
+        ];
+
+        pieces.forEach((val, i) => {
+            const conf = configs[i % 4];
             const tile = document.createElement('div');
-            // Using existing classes from provided UI
-            tile.className = `w-16 h-16 rounded-xl text-white flex flex-col items-center justify-center font-display-lg text-[28px] tile-3d cursor-grab relative group`;
-            tile.style.backgroundColor = color;
-            tile.innerHTML = `<span>${val}</span>`;
-            tile.dataset.value = val;
+            tile.className = `w-16 h-16 ${conf.bg} rounded-lg flex flex-col items-center justify-center tile-shadow border ${conf.border} cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-transform flex-shrink-0 relative group`;
+            tile.innerHTML = `
+                <span class="material-symbols-outlined absolute top-1 text-[12px] ${conf.on}/50 group-hover:${conf.on} transition-colors">keyboard_arrow_up</span>
+                <span class="font-headline-md text-headline-md ${conf.on} drop-shadow-sm mt-1">${val}</span>
+                <span class="material-symbols-outlined absolute bottom-1 text-[12px] ${conf.on}/50 group-hover:${conf.on} transition-colors">keyboard_arrow_down</span>
+            `;
             
-            this.addSwipeSupport(tile);
+            this.attachSwipe(tile, val, conf);
             tray.appendChild(tile);
         });
     }
 
-    addSwipeSupport(el) {
+    attachSwipe(el, val, conf) {
         let startY = 0;
-        el.addEventListener('touchstart', (e) => { startY = e.touches[0].clientY; }, {passive: true});
-        el.addEventListener('touchend', (e) => {
-            const endY = e.changedTouches[0].clientY;
-            const diff = startY - endY;
-            const threshold = 50;
-
-            if (diff > threshold) this.moveTile(el, 'upper');
-            else if (diff < -threshold) this.moveTile(el, 'lower');
+        el.addEventListener('touchstart', e => startY = e.touches[0].clientY, {passive: true});
+        el.addEventListener('touchend', e => {
+            let diff = startY - e.changedTouches[0].clientY;
+            if (Math.abs(diff) > 40) {
+                this.placeTile(val, diff > 0 ? 'upper' : 'lower', conf);
+                el.remove();
+            }
         });
     }
 
-    moveTile(el, zoneId) {
-        const val = parseInt(el.dataset.value);
-        const targetZone = document.getElementById(`${zoneId}-zone`);
+    placeTile(val, zone, conf) {
+        const container = document.getElementById(`${zone}-zone`);
+        const placed = document.createElement('div');
+        placed.className = `w-20 h-20 ${zone === 'upper' ? 'bg-primary-container' : 'bg-secondary-container'} rounded-xl flex items-center justify-center tile-shadow border border-white/10 transition-transform`;
+        placed.innerHTML = `<span class="font-display-number text-display-number drop-shadow-md">${val}</span>`;
         
-        // UI Adjustment to match zone tile size
-        el.className = el.className.replace('w-16 h-16', 'w-20 h-20').replace('text-[28px]', 'text-[32px]');
-        el.style.position = 'relative';
-        
-        targetZone.appendChild(el);
-        if (zoneId === 'upper') this.upperSum += val;
+        container.appendChild(placed);
+        if (zone === 'upper') this.upperSum += val;
         else this.lowerSum += val;
 
         this.placedCount++;
-        if (this.placedCount === 4) this.checkResult();
+        if (this.placedCount === 4) this.validate();
     }
 
-    checkResult() {
+    validate() {
         setTimeout(() => {
-            if (this.upperSum === this.lowerSum) {
-                this.level++;
-                alert("Perfect Equilibrium!");
-                this.startLevel();
+            if (Math.abs(this.upperSum - this.lowerSum) < 0.01) {
+                alert("Equalized!");
+                this.lv++;
+                this.timeLeft += 15;
+                this.generateLevel();
             } else {
-                this.lives--;
-                alert(`Imbalance! Upper: ${this.upperSum} vs Lower: ${this.lowerSum}`);
-                if (this.lives <= 0) this.handleGameOver("No Lives Left");
-                else this.startLevel();
+                this.handleFailure(`Imbalance: ${this.upperSum} vs ${this.lowerSum}`);
             }
-        }, 300);
+        }, 400);
     }
 
-    handleGameOver(reason) {
-        alert(`Game Over: ${reason}. Restarting...`);
-        this.level = 1;
-        this.lives = 5;
-        this.timeLeft = 120;
-        this.startLevel();
+    updateHearts() {
+        const container = document.getElementById('hearts-container');
+        container.innerHTML = Array(3).fill(0).map((_, i) => 
+            `<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' ${i < this.lives ? 1 : 0};">favorite</span>`
+        ).join('');
+    }
+
+    handleFailure(msg) {
+        this.lives--;
+        alert(msg);
+        if (this.lives <= 0) {
+            alert("Game Over!");
+            this.lv = 1;
+            this.lives = 3;
+            this.timeLeft = 60;
+        }
+        this.generateLevel();
     }
 }
 
-// Global initialization
-window.addEventListener('DOMContentLoaded', () => {
-    new GameEngine();
-});
+window.onload = () => new EqualBlocksEngine();
 </script>
 </body>
 </html>
